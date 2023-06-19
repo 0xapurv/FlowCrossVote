@@ -2,7 +2,7 @@
 
 This is a demo application to implement voting in solidity smart contract using ReactJS. 
 
-[Youtube Tutorial](https://youtu.be/eCn6mHTpuM0)
+[image](/assets/cross_chain_voting.jpg)
 
 ## Installation
 
