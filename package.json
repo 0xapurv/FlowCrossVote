@@ -5,6 +5,7 @@
   "dependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
     "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@routerprotocol/evm-gateway-contracts": "^1.1.13",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -40,6 +41,6 @@
     ]
   },
   "devDependencies": {
-    "hardhat": "^2.14.1"
+    "hardhat": "^2.16.0"
   }
 }
