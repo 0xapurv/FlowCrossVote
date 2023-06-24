@@ -18,7 +18,7 @@ function App() {
   const [number, setNumber] = useState('');
   const [CanVote, setCanVote] = useState(true);
 
-
+const name  = "madhav"
   useEffect(() => {
     getCandidates();
     getRemainingTime();
