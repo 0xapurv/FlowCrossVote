@@ -126,7 +126,3 @@ contract Voting is IDapp, Ownable {
     }
 }
 
-        return votingEnd - block.timestamp;
-    }
-
-}
