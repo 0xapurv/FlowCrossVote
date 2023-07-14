@@ -1,30 +1,25 @@
 import React, { useEffect, useState, useContext } from 'react';
 import useVotingApp from '@/src/components/useFlowVottingApp';
 import { WalletContext } from '@/src/contexts/WalletContext';
+import RestrictedToLogin from '@/src/components/RestrictedToLogin';
+
 const CreateVote = () => {
   const [isUserLoggedIn,setIsUserLoggedIn] = useState(false)
   const [duration, setDuration] = useState(0);
   const [daysToStart,SetDaysToStart] = useState(0);
   const [name,setName] = useState('name')
-  const [options,setOptions] = useState(["burguer","pizza"])
+  const [options,setOptions] = useState([])
   const [optionName,setOptionName] = useState('')
-  const [accName,setAccName] = useState('')
 
   let user = useContext(WalletContext);
   
-  const handleAccName = (e) => {
-    setAccName(e.target.value)
-  }
+  
   const handleCreateVote = async () => {
     const votingApp = new useVotingApp()
     const res = await votingApp.transactionCreateVotation(name,daysToStart,daysToStart+duration,options)
     console.log(res)
   };
-  const handleLogin = async () => {
-    const votingApp = new useVotingApp()
-    await votingApp.transactionSetUpAccount(accName)
-    setIsUserLoggedIn(true)
-  }
+  
 
   const onChangeDuration = (e) => {
     setDuration(e.target.value);
@@ -66,11 +61,8 @@ const CreateVote = () => {
   
   isLoggedIn()
   
-
-
-  return (<div>{user.addr == undefined ? <div>please connect your wallet</div>: <>
-    { isUserLoggedIn == true ? 
-    <div className="flex flex-row">
+  const content = <>
+    <div className="flex flex-row" key={1}>
       <div className="flex flex-col">
         <h2 className="text-xl my-10">Create a Vote</h2>
         <div>
@@ -136,8 +128,10 @@ const CreateVote = () => {
           </tbody>
         </table>
       </div> */}
-    </div> : <div><div>account name:<input className="text-black border-secondary p-5 outline-none" value={accName} onChange={handleAccName}></input></div><div onClick={handleLogin}>clickto login</div></div>}</>}</div>
-  ); 
+    </div>
+  </>
+
+  return <RestrictedToLogin >{content}</RestrictedToLogin>; 
 };
 
 export default CreateVote;
