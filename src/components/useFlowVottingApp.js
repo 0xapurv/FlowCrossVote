@@ -2,6 +2,7 @@ import * as fcl from "@onflow/fcl";
 
 export default class useVotingApp {
     async scriptIsUserSignedUp(address){
+        console.log('script is signed up',address)
         try {
             const response = await fcl.query({
                 cadence: `
@@ -25,7 +26,7 @@ export default class useVotingApp {
                 
                 `,
                 args: (arg, t) => [
-                    arg(address, t.Address),
+                    arg(`${address}`, t.Address),
                 ]
             },)
             return {status:"succes",data:response}
@@ -210,14 +211,14 @@ export default class useVotingApp {
                 ,
                 args: (arg, t) => [
                     arg(name, t.String),
-                    arg(`${startsInDays}`,t.UInt64),
-                    arg(`${endsInDays}`,t.UInt64),
+                    arg(`${startsInDays}.0`,t.UFix64),
+                    arg(`${endsInDays}.0`,t.UFix64),
                     arg(options, t.Array(t.String))
                 ],
                 payer: fcl.authz,
                 proposer: fcl.authz,
                 authorizations: [fcl.authz],
-                limit: 500
+                limit: 200
             });
             return {status:"succes",data:response}
         } catch (err) {

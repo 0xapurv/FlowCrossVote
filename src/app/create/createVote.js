@@ -1,75 +1,106 @@
-'use client';
-
-import React, { useState } from 'react';
-
+import React, { useEffect, useState, useContext } from 'react';
+import useVotingApp from '@/src/components/useFlowVottingApp';
+import { WalletContext } from '@/src/contexts/WalletContext';
 const CreateVote = () => {
-  const [duration, setDuration] = useState('');
-  const [candidates, setCandidates] = useState([]);
-  const [isVoteCreated, setIsVoteCreated] = useState(false);
-  const [winner, setWinner] = useState('');
-  const [voteTable, setVoteTable] = useState([]);
+  const [isUserLoggedIn,setIsUserLoggedIn] = useState(false)
+  const [duration, setDuration] = useState(0);
+  const [daysToStart,SetDaysToStart] = useState(0);
+  const [name,setName] = useState('name')
+  const [options,setOptions] = useState(["burguer","pizza"])
+  const [optionName,setOptionName] = useState('')
+  const [accName,setAccName] = useState('')
 
-  const handleDurationChange = (e) => {
+  let user = useContext(WalletContext);
+  
+  const handleAccName = (e) => {
+    setAccName(e.target.value)
+  }
+  const handleCreateVote = async () => {
+    const votingApp = new useVotingApp()
+    const res = await votingApp.transactionCreateVotation(name,daysToStart,daysToStart+duration,options)
+    console.log(res)
+  };
+  const handleLogin = async () => {
+    const votingApp = new useVotingApp()
+    await votingApp.transactionSetUpAccount(accName)
+    setIsUserLoggedIn(true)
+  }
+
+  const onChangeDuration = (e) => {
     setDuration(e.target.value);
-  };
 
-  const handleCandidateChange = (index, e) => {
-    const updatedCandidates = [...candidates];
-    updatedCandidates[index] = e.target.value;
-    setCandidates(updatedCandidates);
-  };
+  }
 
-  const handleAddCandidate = () => {
-    setCandidates([...candidates, '']);
-  };
+  const onChangeName = (e) => {
+    console.log(e.target.value)
+    setName(e.target.value)
+  }
 
-  const handleRemoveCandidate = (index) => {
-    const updatedCandidates = [...candidates];
-    updatedCandidates.splice(index, 1);
-    setCandidates(updatedCandidates);
-  };
+  const onChangeDaysToStart = (e) => {
+    SetDaysToStart(e.target.value)
+  }
 
-  const handleCreateVote = () => {
-    setIsVoteCreated(true);
-    const voteResults = candidates.map((candidate) => ({
-      name: candidate,
-      votes: Math.floor(Math.random() * 100), // Generate random vote count for each candidate
-    }));
-    const winner = voteResults.reduce(
-      (prevWinner, currentCandidate) =>
-        currentCandidate.votes > prevWinner.votes ? currentCandidate : prevWinner,
-      { votes: -1 }
-    );
-    setWinner(winner.name);
-  };
+  const addOption = () => {
+    setOptions([...options,optionName])
+    setOptionName("")
+  }
 
-  // Update the vote table whenever candidates or duration changes
-  React.useEffect(() => {
-    const updatedVoteTable = candidates.map((candidate, index) => ({
-      candidate: candidate,
-      votes: 0,
-    }));
-    setVoteTable(updatedVoteTable);
-  }, [candidates]);
 
-  return (
+
+  const onChangeOptionName = (e) => {
+    setOptionName(e.target.value)
+  }
+
+  async function isLoggedIn(){
+    if(user.addr==undefined){
+      return
+    }
+    if(isUserLoggedIn==true){
+      return
+    }
+    console.log('is logged in',isUserLoggedIn)
+    const votingApp = new useVotingApp()
+    const data = await votingApp.scriptIsUserSignedUp(user.addr)
+    setIsUserLoggedIn(data.data)
+  }
+  
+  isLoggedIn()
+  
+
+
+  return (<div>{user.addr == undefined ? <div>please connect your wallet</div>: <>
+    { isUserLoggedIn == true ? 
     <div className="flex flex-row">
       <div className="flex flex-col">
         <h2 className="text-xl my-10">Create a Vote</h2>
+        <div>
+          Votation Title:
+          <input className="text-black border-secondary p-5 outline-none"onChange={onChangeName} value={name}/>
+        </div>
         <div className="center gap-6">
           <label htmlFor="duration" className="text-lg">
-            Duration (in hours):
+            Days from now to start votation:
           </label>
           <input
             className="text-black border-secondary p-5 outline-none"
             type="number"
             id="duration"
-            value={duration}
-            onChange={handleDurationChange}
+            value={daysToStart}
+            onChange={onChangeDaysToStart}
           />
         </div>
+        <div>
+          Votation Duration(days):
+          <input type='number' className="text-black border-secondary p-5 outline-none" value={duration} onChange={onChangeDuration}></input>
+        </div>
+        <div>
+          Votation Options:
+          {options.map(option => <div>{option}</div>)}
+          <input className="text-black border-secondary p-5 outline-none" value={optionName} onChange={onChangeOptionName}></input>
+          <button onClick={addOption}>Add Option Button</button>
+        </div>
 
-        <h4>Candidates:</h4>
+        {/* <h4>Candidates:</h4>
         {candidates.map((candidate, index) => (
           <div key={index} className="flex flex-col gap-4">
             <input
@@ -80,20 +111,13 @@ const CreateVote = () => {
             />
             <button onClick={() => handleRemoveCandidate(index)}>Remove</button>
           </div>
-        ))}
-        <button onClick={handleAddCandidate}>Add Candidate</button>
+        ))} */}
+        {/* <button onClick={handleAddCandidate}>Add Candidate</button> */}
 
-        <button onClick={handleCreateVote}>Create Vote</button>
-
-        {isVoteCreated && (
-          <div>
-            <h3>Time's up!</h3>
-            <p>The winner is: {winner}</p>
-          </div>
-        )}
+        <button onClick={handleCreateVote}>Create Vote Button</button>
       </div>
 
-      <div className="ml-8">
+      {/* <div className="ml-8">
         <h4>Vote Table:</h4>
         <table className="border-collapse border border-gray-500">
           <thead>
@@ -111,9 +135,9 @@ const CreateVote = () => {
             ))}
           </tbody>
         </table>
-      </div>
-    </div>
-  );
+      </div> */}
+    </div> : <div><div>account name:<input className="text-black border-secondary p-5 outline-none" value={accName} onChange={handleAccName}></input></div><div onClick={handleLogin}>clickto login</div></div>}</>}</div>
+  ); 
 };
 
 export default CreateVote;
