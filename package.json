@@ -13,7 +13,7 @@
     "@chakra-ui/react": "^2.7.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@thirdweb-dev/react": "^3.14.7",
+    "@onflow/fcl": "^1.4.1",
     "autoprefixer": "10.4.14",
     "ethers": "5.7",
     "framer-motion": "^10.12.18",
@@ -21,6 +21,7 @@
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-type-animation": "^3.1.0",
     "tailwindcss": "3.3.2"
   }
 }
