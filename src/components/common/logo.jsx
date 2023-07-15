@@ -6,7 +6,7 @@ const Logo = () => {
     return (
         <Link href='/'>
             <div className="text-white font-bold text-[1.6rem] hover:text-secondary transition duration-300">
-                VoteChain
+                FlowVoteChain
             </div>
         </Link>
     );
