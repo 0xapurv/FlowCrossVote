@@ -9,7 +9,7 @@ import MyVotation from "@/src/components/myVotation";
 export default function myvotations(){
     const [voatations,setVotations] = useState([])
     let user = useContext(WalletContext);
-
+    console.log(voatations)
     async function getVotations (){
         if(voatations.length>0){
             return 

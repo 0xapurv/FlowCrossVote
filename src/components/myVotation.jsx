@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useVotingApp from "./useFlowVottingApp";
+import { WalletContext } from '@/src/contexts/WalletContext';
 export default function MyVotation({name,uuid}){
     const [address,setAddress] = useState('')
     const [errorMessage,setErrorMessage] = useState('')
     const [succefulMessage,setSuccefulMessage] = useState('')
+    let user = useContext(WalletContext);
     const votingapp = new useVotingApp()
     async function onaddCandidate(){
         if(address>"0xc6a01f56e1ff8764"){
@@ -22,7 +24,6 @@ export default function MyVotation({name,uuid}){
             return  
         }
         const data = await votingapp.transactionAddCandidate(uuid,address)
-        console.log(data)
         setSuccefulMessage("candidate added succefully")
     }
 
@@ -32,6 +33,9 @@ export default function MyVotation({name,uuid}){
         }
         setAddress(e.target.value)
     }
+
+    const currentURL = new URL(window.location.href);
+    const baseURL = `${currentURL.protocol}//${currentURL.host}/`;
     return <div>
         <br/>
         <br/>
@@ -46,14 +50,14 @@ export default function MyVotation({name,uuid}){
             <input value={address} placeholder="0xc6a01f56e1ff8764" onChange={onChangeAddress}className="text-black outline-secondary py-2 pl-4 w-3/5"/>
             <button onClick={onaddCandidate}>Add Candidate</button>
         </div>
-        <Link href={`${window.location.href}/votation/${uuid}`}>
+        <Link href={`${baseURL}votation/${uuid}owner${user.addr}`}>
             <div>
                 Click to go to Votation Details --&gt;
             </div>
         </Link>
         
         <div>
-            link to share the votation and see the stadistics: {window.location.href}/votation/{uuid}
+            link to share the votation and see the stadistics: {baseURL}votation/{uuid}owner{user.addr}
         </div>
     </div>
 }

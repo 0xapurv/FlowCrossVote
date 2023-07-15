@@ -66,11 +66,11 @@ export default class useVotingApp {
                     import VotingContract from 0xdfa1d1c02f83399d
 
                     pub fun main(votationuuid:String,owner: Address):VotingContract.VotationData {
-                    let user = getAccount(owner)
-                    log(user.storageUsed)
-                    let path = PublicPath(identifier: "votation".concat(votationuuid))!
-                    let votationRef = user.getCapability<&AnyResource{VotingContract.VotationInterface}>(path).borrow() ?? panic("user does not have a vottation profile")
-                    return votationRef.getData()
+                        let user = getAccount(owner)
+                        log(user.storageUsed)
+                        let path = PublicPath(identifier: "votation".concat(votationuuid))!
+                        let votationRef = user.getCapability<&AnyResource{VotingContract.VotationInterface}>(path).borrow() ?? panic("user does not have a vottation profile")
+                        return votationRef.getData()
                     }
 
                 `,
