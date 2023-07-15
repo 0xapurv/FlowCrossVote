@@ -1,4 +1,5 @@
 'use client'
+
 import Navbar from "@/src/components/Navbar/Navbar"
 import RestrictedToLogin from "@/src/components/RestrictedToLogin"
 import { useState,useContext } from "react"
@@ -24,10 +25,10 @@ export default function myvotations(){
     }
     getVotations()
     const content = voatations.map(votation=><MyVotation name={votation.name} uuid={votation.uuid}/>)
-    return <div>
-        <Navbar/>
-        <RestrictedToLogin>
-            {content}
-        </RestrictedToLogin>
-    </div>
+    return <div className="w-screen flex-col center">
+            <Navbar/>
+            <RestrictedToLogin>
+                {content}
+            </RestrictedToLogin>
+        </div>
 }

@@ -67,7 +67,7 @@ const CreateVote = () => {
   const content =
     <div className="flex flex-row w-screen center">
       <div className="flex flex-col gap-10 w-[85%] pb-20">
-        <h2 className="text-lg mt-16">Create a Vote</h2>
+        <h2 className="text-lg mt-16 bespoke">Create a Vote</h2>
         <div className='flex flex-col gap-2 items-start'>
           <label htmlFor="title">Vote Title:</label>
           <input className="text-black outline-secondary py-2 pl-4 w-3/5" onChange={onChangeName} value={name} id='title'/>
@@ -95,7 +95,7 @@ const CreateVote = () => {
             <label htmlFor="option">
               Voting Options:
             </label>
-            <button onClick={addOption}>Add Options</button>
+            <button className='p-3 text-sm bg-secondary hover:scale-95 transition-all duration-300' onClick={addOption}>Add Options</button>
           </div>
           {options.map(option => <div>{option}</div>)}
           <input className="text-black outline-secondary w-full py-3 pl-4 " placeholder="Enter an option" value={optionName} onChange={onChangeOptionName}></input>
