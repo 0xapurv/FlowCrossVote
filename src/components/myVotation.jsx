@@ -33,31 +33,29 @@ export default function MyVotation({name,uuid}){
         }
         setAddress(e.target.value)
     }
-
-    const currentURL = new URL(window.location.href);
-    const baseURL = `${currentURL.protocol}//${currentURL.host}/`;
-    return <div>
-        <br/>
-        <br/>
-        <div>
-            votation name: {name}
-        </div>
-        
-        <div>
-            <div>add candidate address</div>
-            {errorMessage.length > 0 ? <div>error message:{errorMessage}</div> : <div></div>}
-            {succefulMessage.length >0 ? <div>succefull message:{succefulMessage}</div> : <div></div>}
-            <input value={address} placeholder="0xc6a01f56e1ff8764" onChange={onChangeAddress}className="text-black outline-secondary py-2 pl-4 w-3/5"/>
-            <button onClick={onaddCandidate}>Add Candidate</button>
-        </div>
-        <Link href={`${baseURL}votation/${uuid}owner${user.addr}`}>
-            <div>
-                Click to go to Votation Details --&gt;
+    return (
+        <div className="w-screen center mt-10">
+            <div className="my-10 w-[85%]">
+                <div className="text-md mb-2">
+                    Votation name: {name}
+                </div>
+                
+                <div>
+                    <div>add candidate address</div>
+                    <input className="text-black outline-secondary py-2 pl-4 w-3/5 mb-1"/>
+                    <div>{errorMessage}</div>
+                    <button>Add Candidate</button>
+                </div>
+                <Link href={`${window.location.href}/votation/${uuid}`}>
+                    <div>
+                        Click to go to Votation Details --&gt;
+                    </div>
+                </Link>
+                
+                <div>
+                    link to share the votation and see the staistics: {window.location.href}/votation/{uuid}
+                </div>
             </div>
-        </Link>
-        
-        <div>
-            link to share the votation and see the stadistics: {baseURL}votation/{uuid}owner{user.addr}
         </div>
-    </div>
+    )
 }
