@@ -24,7 +24,7 @@ export default function myvotations(){
     }
     getVotations()
     const content = voatations.map(votation=><MyVotation name={votation.name} uuid={votation.uuid}/>)
-    return <div>
+    return <div className="flex flex-col w-full center">
         <Navbar/>
         <RestrictedToLogin>
             {content}
