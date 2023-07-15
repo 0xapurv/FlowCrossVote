@@ -1,6 +1,9 @@
+'use client'
+
 import React, { useEffect, useState, useContext } from 'react';
 import useVotingApp from '@/src/components/useFlowVottingApp';
 import { WalletContext } from '@/src/contexts/WalletContext';
+import CustomButton from '@/src/components/common/button';
 import RestrictedToLogin from '@/src/components/RestrictedToLogin';
 
 const CreateVote = () => {
@@ -61,42 +64,49 @@ const CreateVote = () => {
   
   isLoggedIn()
   
-  const content = <>
-    <div className="flex flex-row" key={1}>
-      <div className="flex flex-col">
-        <h2 className="text-xl my-10">Create a Vote</h2>
-        <div>
-          Votation Title:
-          <input className="text-black border-secondary p-5 outline-none"onChange={onChangeName} value={name}/>
+  const content =
+    <div className="flex flex-row w-screen center">
+      <div className="flex flex-col gap-10 w-[85%] pb-20">
+        <h2 className="text-lg mt-16">Create a Vote</h2>
+        <div className='flex flex-col gap-2 items-start'>
+          <label htmlFor="title">Vote Title:</label>
+          <input className="text-black outline-secondary py-2 pl-4 w-3/5" onChange={onChangeName} value={name} id='title'/>
         </div>
-        <div className="center gap-6">
-          <label htmlFor="duration" className="text-lg">
-            Days from now to start votation:
+        <div className="flex gap-2 items-start flex-col">
+          <label htmlFor="duration">
+            Days from now to start voting:
           </label>
           <input
-            className="text-black border-secondary p-5 outline-none"
+            className="text-black outline-secondary py-3 pl-4 w-3/5"
             type="number"
             id="duration"
             value={daysToStart}
             onChange={onChangeDaysToStart}
           />
         </div>
-        <div>
-          Votation Duration(days):
-          <input type='number' className="text-black border-secondary p-5 outline-none" value={duration} onChange={onChangeDuration}></input>
+        <div className="flex gap-2 items-start flex-col">
+          <label htmlFor="duration">
+            Votation Duration(days):
+          </label>
+          <input type='number' id='duration'  className="text-black w-3/5 outline-secondary py-3 pl-4" placeholder='Enter vote duration' value={duration} onChange={onChangeDuration}></input>
         </div>
-        <div>
-          Votation Options:
+        <div className="flex gap-2 items-start flex-col w-3/5">
+          <div className='between w-full'>
+            <label htmlFor="option">
+              Voting Options:
+            </label>
+            <button onClick={addOption}>Add Options</button>
+          </div>
           {options.map(option => <div>{option}</div>)}
-          <input className="text-black border-secondary p-5 outline-none" value={optionName} onChange={onChangeOptionName}></input>
-          <button onClick={addOption}>Add Option Button</button>
+          <input className="text-black outline-secondary w-full py-3 pl-4 " placeholder="Enter an option" value={optionName} onChange={onChangeOptionName}></input>
+          
         </div>
 
         {/* <h4>Candidates:</h4>
         {candidates.map((candidate, index) => (
           <div key={index} className="flex flex-col gap-4">
             <input
-              className="text-black border-secondary p-5 outline-none"
+              className="text-black border-secondary p-5 o6utline-none"
               type="text"
               value={candidate}
               onChange={(e) => handleCandidateChange(index, e)}
@@ -105,8 +115,7 @@ const CreateVote = () => {
           </div>
         ))} */}
         {/* <button onClick={handleAddCandidate}>Add Candidate</button> */}
-
-        <button onClick={handleCreateVote}>Create Vote Button</button>
+        <CustomButton textSize='1.2rem' border='1px solid #A6245A' padding='15px 30px' background='#A6245A' borderRadius='0' textColor='#FFF' onClick={handleCreateVote}>Create Vote</CustomButton>
       </div>
 
       {/* <div className="ml-8">
@@ -129,7 +138,6 @@ const CreateVote = () => {
         </table>
       </div> */}
     </div>
-  </>
 
   return <RestrictedToLogin >{content}</RestrictedToLogin>; 
 };

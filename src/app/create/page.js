@@ -12,8 +12,6 @@ const Create = () => {
     <div className="flex flex-col w-full center">
       <Navbar />
       <CreateVote />
-      <h2>User Data:</h2>
-      <p className='text-white'>Address: {user?.addr}</p>
     </div>
   );
 }
