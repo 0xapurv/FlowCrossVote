@@ -31,7 +31,15 @@ export default function vote(){
     console.log(votes)
     const content = <div>
         {votes.length > 0 ? <div>
-            {votes.map(vote => <MyVote/>)}
+            {votes.map(vote =>  <MyVote 
+                                    key={vote.votationUuid}
+                                    votationName={vote.votationName} 
+                                    votationUuid={vote.votationUuid} 
+                                    voteEnds={vote.voteEnds} 
+                                    voteStarts={vote.voteStarts} 
+                                    options={vote.options}
+                                />
+            )}
         </div> : <div>you have no pendent votes to use</div>}
     </div>
     return <div className="flex flex-col w-full center">
