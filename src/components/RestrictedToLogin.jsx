@@ -29,10 +29,10 @@ export default function RestrictedToLogin({children}){
       }
       
       isLoggedIn()
-      console.log(children)
+      console.log(user.addr)
       return (
         <div>
-          {user.addr === undefined ? (
+          {user.addr === undefined || user.addr === null ? (
             <div>please connect your wallet</div>
           ) : (
             <>

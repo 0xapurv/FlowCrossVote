@@ -35,7 +35,7 @@ const Navbar = () => {
         <Link href="/" className='hover:text-secondary hover:scale-95 transition duration-300'>Home</Link>
         <Link href="/create" className='hover:text-secondary hover:scale-95 transition duration-300'>Create Vote</Link>
         <Link href="/vote" className='hover:text-secondary hover:scale-95 transition duration-300'>My Vote</Link>
-        <Link href="/create" className='hover:text-secondary hover:scale-95 transition duration-300'>My created votes</Link>
+        <Link href="/myvotations" className='hover:text-secondary hover:scale-95 transition duration-300'>My created votations</Link>
       </div>
       <div className="">
         {user.loggedIn
