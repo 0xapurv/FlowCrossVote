@@ -40,7 +40,7 @@ export default function vote(){
                                     options={vote.options}
                                 />
             )}
-        </div> : <div>you have no pendent votes to use</div>}
+        </div> : <div>you have no pending votes to use</div>}
     </div>
     return <div className="flex flex-col w-full center">
         <Navbar/>

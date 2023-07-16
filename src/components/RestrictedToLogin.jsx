@@ -33,20 +33,20 @@ export default function RestrictedToLogin({children}){
       return (
         <div>
           {user.addr === undefined || user.addr === null ? (
-            <div>please connect your wallet</div>
+            <div className="w-screen h-[90vh] center">please connect your wallet</div>
           ) : (
             <>
               {isUserLoggedIn ? (
                 children
               ) : (
-                <div>
+                <div className="h-[90vh] gap-8 center flex-col">
                   <div>account name:</div>
                   <input
                     className="text-black border-secondary p-5 outline-none"
                     value={accName}
                     onChange={handleAccName}
                   />
-                  <div onClick={handleLogin}>click to login</div>
+                  <button className='bg-secondary px-6 py-2 text-[.9rem] hover:scale-95 transition-all duration-300' onClick={handleLogin}>click to login</button>
                 </div>
               )}
             </>

@@ -4,6 +4,7 @@ import Navbar from "@/src/components/Navbar/Navbar";
 import useVotingApp from "@/src/components/useFlowVottingApp";
 import { useState } from "react";
 import { usePathname } from 'next/navigation';
+import Loading from "../../loading";
 
 export default function Votation(){
     const pathname = usePathname()
@@ -39,15 +40,15 @@ export default function Votation(){
     console.log(votationData)
     return <div className="flex flex-col w-full center">
         <Navbar />
-        {loading ? <div>loading</div> : 
-        <div> 
-            <div>votation name: {votationData.votationName}</div> 
-            <div>amount candidates: {votationData.amountCandidates}</div> 
-            <div>amount candidate has voted: {votationData.usedVotes}</div> 
-            <div>votation start end date:{timestampToReadableDate(votationData.voteStarts)} </div>
-            <div>votation end date:{timestampToReadableDate(votationData.voteEnds)} </div>
-            <div>{votationData.options.map((option,index)=><div>option : {option} | amount votes : {votationData.optionsAmountVotes[index]}</div>)}</div>
-
+        {loading ? <Loading /> : 
+        <div className="w-[85%] min-h-[90vh] flex justify-center flex-col gap-6"> 
+            <div className="flex gap-3"><p className="font-bold text-secondary capitalize">votation name:</p> {votationData.votationName}</div> 
+            <div className="flex gap-3"><p className="font-bold text-secondary capitalize">amount candidates:</p> {votationData.amountCandidates}</div> 
+            <div className="flex gap-3"><p className="font-bold text-secondary capitalize">amount candidate has voted:</p> {votationData.usedVotes}</div> 
+            <div className="flex gap-3"><p className="font-bold text-secondary capitalize">votation start date:</p>{timestampToReadableDate(votationData.voteStarts)} </div>
+            <div className="flex gap-3"><p className="font-bold text-secondary capitalize">votation end date: </p>{timestampToReadableDate(votationData.voteEnds)} </div>
+            <div>{votationData.options.map((option,index)=><div className="flex gap-3 capitalize"><p className="font-bold text-secondary">option: </p> {option} | number of votes : {votationData.optionsAmountVotes[index]}</div>)}</div>
+ 
         </div>}
     </div>
 }

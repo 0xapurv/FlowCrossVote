@@ -35,28 +35,28 @@ export default function MyVotation({name,uuid}){
 
     const currentURL = new URL(window.location.href);
     const baseURL = `${currentURL.protocol}//${currentURL.host}/`;
-    return <div>
-        <br/>
-        <br/>
-        <div>
-            votation name: {name}
-        </div>
-
-        <div>
-            <div>add candidate address</div>
-            {errorMessage.length > 0 ? <div>error message:{errorMessage}</div> : <div></div>}
-            {succefulMessage.length >0 ? <div>succefull message:{succefulMessage}</div> : <div></div>}
-            <input value={address} placeholder="0xc6a01f56e1ff8764" onChange={onChangeAddress}className="text-black outline-secondary py-2 pl-4 w-3/5"/>
-            <button onClick={onaddCandidate}>Add Candidate</button>
-        </div>
-        <Link href={`${baseURL}votation/${uuid}owner${user.addr}`}>
+    return <div className="w-screen center mt-16">
+        <div className="w-[85%] flex flex-col mb-10">
             <div>
-                Click to go to Votation Details --&gt;
+                votation name: {name}
             </div>
-        </Link>
 
-        <div>
-            link to share the votation and see the stadistics: {baseURL}votation/{uuid}owner{user.addr}
+            <div>
+                <div className="my-2">add candidate address</div>
+                {errorMessage.length > 0 ? <div>{errorMessage}</div> : <div></div>}
+                {succefulMessage.length >0 ? <div>{succefulMessage}</div> : <div></div>}
+                <input value={address} placeholder="0xc6a01f56e1ff8764" onChange={onChangeAddress}className="text-black outline-secondary py-2 pl-4 w-3/5"/>
+                <button className="ml-6 bg-secondary px-6 py-3 text-[.9rem] hover:scale-95 transition-all duration-300" onClick={onaddCandidate}>Add Candidate</button>
+            </div>
+            <Link href={`${baseURL}votation/${uuid}owner${user.addr}`}>
+                <button className='bg-secondary px-6 py-2 text-[.9rem] hover:scale-95 transition-all duration-300 mt-1 mb-3'>
+                    Click to go to Votation Details --&gt;
+                </button>
+            </Link>
+
+            <div>
+                link to share the votation and see the stadistics: {baseURL}votation/{uuid}owner{user.addr}
+            </div>
         </div>
     </div>
 }
