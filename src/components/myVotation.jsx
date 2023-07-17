@@ -9,7 +9,7 @@ export default function MyVotation({name,uuid}){
     let user = useContext(WalletContext);
     const votingapp = new useVotingApp()
     async function onaddCandidate(){
-        if(address>"0xc6a01f56e1ff8764"){
+        if(address.length>"0xc6a01f56e1ff8764"){
             setErrorMessage("please enter a valid address")
             return 
         }
