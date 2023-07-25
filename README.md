@@ -7,9 +7,9 @@ A cross-chain Voting solution to get votations from multiple EVM \& Non-EVM chai
 A crosschain voting app takes it a step further, addressing the issue of interoperability among different blockchain networks. By leveraging crosschain technology, it allows voters from various blockchain ecosystems to participate seamlessly in elections, transcending boundaries and fostering inclusivity. This innovative approach enhances the app's resilience, scalability, and accessibility, making it a powerful tool for shaping the future of global governance.
 
 ## Links
-1. Deployment - [View Deployement](https://flow-vote-chain.vercel.app/)
+1. Deployment - [View Deployment](https://flow-vote-chain.vercel.app/)
 2. Docs - [Link](https://flow-hackaton.gitbook.io/crosschain-voting/)
-3. Smart Contract - [View Deployement](https://flow-view-source.com/testnet/account/0xdfa1d1c02f83399d)
+3. Smart Contract - [View Deployment](https://flow-view-source.com/testnet/account/0xdfa1d1c02f83399d)
 
 ## How we distinguish from other Voting Protocols?
 1. Restict Votations to only allowed candidates can vote, attracting insitutions that need identity verification for this
